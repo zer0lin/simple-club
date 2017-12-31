@@ -29,6 +29,7 @@ app.use(koaStatic(
 
 // 配置全局变量
 app.use(async (ctx, next) => {
+  ctx.state.user = ctx.session.user;
   ctx.state.success = ctx.flash('success').toString();
   ctx.state.error = ctx.flash('error').toString();
 });
