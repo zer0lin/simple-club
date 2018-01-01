@@ -11,12 +11,15 @@ const flash = require('koa-better-flash');
 
 const app = new Koa();
 
+app.keys = ['SC_S', 'SC_C'];
 // 配置session
 app.use(session({
-  key: 'SC_SID',
-  httpOnly: true,
-  maxAge: 24 * 60 * 60 * 1000,
-  overwrite: true,
+  cookie: {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    overwrite: true,
+    signed: true
+  }
 }));
 
 // 配置flash
@@ -32,10 +35,11 @@ app.use(async (ctx, next) => {
   ctx.state.user = ctx.session.user;
   ctx.state.success = ctx.flash('success').toString();
   ctx.state.error = ctx.flash('error').toString();
+  await next();
 });
 
 // 配置模板引擎
-app.use(views(path.join(__dirname, './views'), {
+app.use(views(path.join(__dirname, './view'), {
   extension: 'ejs'
 }));
 
