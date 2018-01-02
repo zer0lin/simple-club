@@ -9,3 +9,9 @@ exports.signup = async (user) => {
   sql = "insert into user(username, password, gender, bio, auth) values(?, ?, ?, ?, ?)";
   await query(sql, [user.username, user.password, user.gender, user.bio, user.auth]);
 }
+
+exports.signin = async (username) => {
+  let sql = `select * from user where username = "${username}"`;
+  let user = await query(sql, []);
+  return parseData(user);
+}

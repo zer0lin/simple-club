@@ -1,7 +1,7 @@
 const sha1 = require('sha1');
 const service = require('../service');
 
-exports.show = async (ctx, next) => {
+exports.show_signup = async (ctx, next) => {
   await ctx.render('signup');
 }
 
@@ -42,7 +42,7 @@ exports.signup = async (ctx, next) => {
     delete user.password;
     ctx.session.user = user;
     ctx.flash('success', '注册成功');
-    ctx.redirect('/');
+    ctx.redirect('/board');
   } catch (err) {
     ctx.flash('error', err.message);
     ctx.redirect('/signup');
@@ -53,4 +53,42 @@ exports.signout = async (ctx, next) => {
   ctx.session.user = null;
   ctx.flash('success', '登出成功');
   ctx.redirect('/');
+}
+
+exports.show_signin = async (ctx, next) => {
+  await ctx.render('signin');
+}
+
+exports.signin = async (ctx, next) => {
+  const username = ctx.request.body.username;
+  const password = ctx.request.body.password;
+  // 校验参数
+  try {
+    if (!username.length) {
+      throw new Error('请填写用户名');
+    }
+    if (!password.length) {
+      throw new Error('请填写密码');
+    }
+  } catch(e) {
+    ctx.flash('error', e.message);
+    return ctx.redirect('back');
+  }
+  let user = await service.user.signin(username);
+  if (!user.length) {
+    ctx.flash('error', '用户不存在');
+    return ctx.redirect('back');
+  }
+  // 检查密码是否匹配
+  // console.log(sha1(password));
+  // console.log(user);
+  // console.log(user[0].password);
+  if (sha1(password) !== user[0].password) {
+    ctx.flash('error', '用户名或密码错误');
+    return ctx.redirect('back');
+  }
+  ctx.flash('success', '登陆成功');
+  delete user[0].password;
+  ctx.session.user = user[0];
+  ctx.redirect('/board');
 }
