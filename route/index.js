@@ -16,6 +16,7 @@ router.get('/board', controller.board.show);
 router.get('/signup', auth.checkNotLogin, controller.user.show)
 // 注册请求
 router.post('/signup', auth.checkNotLogin, controller.user.signup);
-
+// 登出
+router.get('/signout', auth.checkLogin, controller.user.signout);
 
 module.exports = router;

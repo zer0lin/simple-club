@@ -48,3 +48,9 @@ exports.signup = async (ctx, next) => {
     ctx.redirect('/signup');
   }
 }
+
+exports.signout = async (ctx, next) => {
+  ctx.session.user = null;
+  ctx.flash('success', '登出成功');
+  ctx.redirect('/');
+}
