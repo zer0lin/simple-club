@@ -1,11 +1,11 @@
 const sha1 = require('sha1');
+const service = require('../service');
 
 exports.show = async (ctx, next) => {
   await ctx.render('signup');
 }
 
 exports.signup = async (ctx, next) => {
-  // console.log('have request');
   const username = ctx.request.body.username;
   let password = ctx.request.body.password;
   const repassword = ctx.request.body.repassword;
@@ -30,7 +30,6 @@ exports.signup = async (ctx, next) => {
   }
   // 密码加密
   password = sha1(password);
-  console.log(password.length);
   let user = {
     username: username,
     password: password,
@@ -38,5 +37,14 @@ exports.signup = async (ctx, next) => {
     bio: bio,
     auth: 0
   };
-  console.log(user);
+  try {
+    await service.user.signup(user);
+    delete user.password;
+    ctx.session.user = user;
+    ctx.flash('success', '注册成功');
+    ctx.redirect('/');
+  } catch (err) {
+    ctx.flash('error', err.message);
+    ctx.redirect('/signup');
+  }
 }
