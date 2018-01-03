@@ -56,6 +56,12 @@ a:hover {
   font-size: 18px;
 }
 
+/* ---------- board-content ---------- */
+
+.ui.link.cards  {
+  padding-left: 100px;
+}
+
 /* ---------- post-content ---------- */
 
 .post-content h3 a {
