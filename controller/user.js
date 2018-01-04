@@ -16,7 +16,7 @@ exports.signup = async (ctx, next) => {
       throw new Error('名字请限制在1-20个字符');
     }
     if (['m', 'f', 'x'].indexOf(gender) === -1) {
-      throw new Error('性别只能是m、f或x');
+      throw new Error('性别只能是男、女或保密');
     }
     if (password.length < 6) {
       throw new Error('密码至少6个字符');
@@ -52,7 +52,7 @@ exports.signup = async (ctx, next) => {
 exports.signout = async (ctx, next) => {
   ctx.session.user = null;
   ctx.flash('success', '登出成功');
-  ctx.redirect('/');
+  ctx.redirect('/board');
 }
 
 exports.show_signin = async (ctx, next) => {
@@ -79,10 +79,6 @@ exports.signin = async (ctx, next) => {
     ctx.flash('error', '用户不存在');
     return ctx.redirect('back');
   }
-  // 检查密码是否匹配
-  // console.log(sha1(password));
-  // console.log(user);
-  // console.log(user[0].password);
   if (sha1(password) !== user[0].password) {
     ctx.flash('error', '用户名或密码错误');
     return ctx.redirect('back');

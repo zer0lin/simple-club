@@ -2,24 +2,20 @@
 <div class="ui grid">
   <div class="four wide column">
     <a class="avatar avatar-link"
-       href="/posts?author=<%= user._id %>"
+       href="javascript:void(0);"
        data-title="<%= user.name %> | <%= ({m: '男', f: '女', x: '保密'})[user.gender] %>"
        data-content="<%= user.bio %>">
-      <img class="avatar" src="/img/<%= user.avatar %>">
+      <img class="avatar" src="/img/person.png">
     </a>
   </div>
 
   <div class="eight wide column">
     <form class="ui form segment" method="post">
       <div class="field required">
-        <label>标题</label>
-        <input type="text" name="title">
+        <label>板块名</label>
+        <input type="text" name="board_name">
       </div>
-      <div class="field required">
-        <label>内容</label>
-        <textarea name="content" rows="15"></textarea>
-      </div>
-      <input type="submit" class="ui button" value="发布">
+      <input type="submit" class="ui button" value="提交">
     </form>
   </div>
 </div>

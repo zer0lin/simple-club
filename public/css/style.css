@@ -62,6 +62,10 @@ a:hover {
   padding-left: 100px;
 }
 
+.ui.inline.dropdown {
+  float: right;
+}
+
 /* ---------- post-content ---------- */
 
 .post-content h3 a {

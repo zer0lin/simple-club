@@ -1,101 +1,26 @@
 <%- include('header') %>
 <div class="ui link cards">
-  <div class="card">
-    <div class="image">
-      <img src="/img/timg.jpg">
-    </div>
-    <div class="content">
-      <div class="header">Matt Giampietro</div>
-      <div class="meta">
-        <a>好友</a>
+  <% board_list.forEach(board => { %>
+    <div class="card">
+      <div class="image">
+        <img src="/img/timg.jpg">
       </div>
-      <div class="description">Matthew is an interior designer living in New York. </div>
-    </div>
-    <div class="extra content">
-      <span><i class="user icon"></i> 75 Friends </span>
-      <span class="right floated">2013年加入 </span>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <img src="/img/timg.jpg">
-    </div>
-    <div class="content">
-      <div class="header">Matt Giampietro</div>
-      <div class="meta">
-        <a>好友</a>
+      <div class="content">
+        <div class="header"><%= board.name %></div>
       </div>
-      <div class="description">Matthew is an interior designer living in New York. </div>
-    </div>
-    <div class="extra content">
-      <span><i class="user icon"></i> 75 Friends </span>
-      <span class="right floated">2013年加入 </span>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <img src="/img/timg.jpg">
-    </div>
-    <div class="content">
-      <div class="header">Matt Giampietro</div>
-      <div class="meta">
-        <a>好友</a>
+      <div class="extra content">
+        <% if (user && user.auth == 1) { %>
+          <div class="ui inline dropdown">
+            <div class="text"></div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item"><a href="#">编辑</a></div>
+              <div class="item"><a href="#">删除</a></div>
+            </div>
+          </div>
+        <% } %>
       </div>
-      <div class="description">Matthew is an interior designer living in New York. </div>
     </div>
-    <div class="extra content">
-      <span><i class="user icon"></i> 75 Friends </span>
-      <span class="right floated">2013年加入 </span>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <img src="/img/timg.jpg">
-    </div>
-    <div class="content">
-      <div class="header">Matt Giampietro</div>
-      <div class="meta">
-        <a>好友</a>
-      </div>
-      <div class="description">Matthew is an interior designer living in New York. </div>
-    </div>
-    <div class="extra content">
-      <span><i class="user icon"></i> 75 Friends </span>
-      <span class="right floated">2013年加入 </span>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <img src="/img/timg.jpg">
-    </div>
-    <div class="content">
-      <div class="header">Matt Giampietro</div>
-      <div class="meta">
-        <a>好友</a>
-      </div>
-      <div class="description">Matthew is an interior designer living in New York. </div>
-    </div>
-    <div class="extra content">
-      <span><i class="user icon"></i> 75 Friends </span>
-      <span class="right floated">2013年加入 </span>
-    </div>
-  </div>
-  <div class="card">
-    <div class="image">
-      <img src="/img/timg.jpg">
-    </div>
-    <div class="content">
-      <div class="header">Matt Giampietro</div>
-      <div class="meta">
-        <a>好友</a>
-      </div>
-      <div class="description">Matthew is an interior designer living in New York. </div>
-    </div>
-    <div class="extra content">
-      <span><i class="user icon"></i> 75 Friends </span>
-      <span class="right floated">2013年加入 </span>
-    </div>
-  </div>
+  <% }) %>
 </div>
-
 <%- include('footer') %>
