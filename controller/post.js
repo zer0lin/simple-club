@@ -4,7 +4,9 @@ const moment = require('moment');
 exports.show_posts = async (ctx, next) => {
   let board_name = ctx.params.name;
   let post_list = await service.post.post_list(board_name);
-  await ctx.render('posts');
+  await ctx.render('posts', {
+    post_list: post_list
+  });
 }
 
 exports.show_create = async (ctx, next) => {

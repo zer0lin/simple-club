@@ -1,5 +1,48 @@
 <%- include('header') %>
 
-hello world!
+<% post_list.forEach(function (post) { %>
+  <div class="post-content">
+    <div class="ui grid">
+      <div class="four wide column">
+        <a class="avatar avatar-link"
+           href="javascript:void(0);"
+           data-title="<%= post.author %>">
+          <img class="avatar" src="/img/person.png">
+        </a>
+      </div>
+
+      <div class="eight wide column">
+        <div class="ui segment">
+          <h3><a href="#"><%= post.title %></a></h3>
+          <div>
+            <span class="tag">发布于 <%= post.moment %> · 作者 <%= post.author %></span>
+            <span class="tag right">
+              <% if (user && user.auth == 1) { %>
+                <div class="ui inline dropdown">
+                  <div class="text"></div>
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    <div class="item"><a href="#">编辑</a></div>
+                    <div class="item"><a href="#">删除</a></div>
+                  </div>
+                </div>
+              <% } %>
+              <% if (user && user.auth == 0 && user.username === post.author) { %>
+                <div class="ui inline dropdown">
+                  <div class="text"></div>
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    <div class="item"><a href="#">删除</a></div>
+                  </div>
+                </div>
+              <% } %>
+
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% }) %>
 
 <%- include('footer') %>

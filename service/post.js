@@ -7,6 +7,7 @@ exports.post_list = async board_name => {
   board = parseData(board);
   sql = `select * from post where board_id = ?`;
   let result = await query(sql, [board[0].id]);
+  return parseData(result);
 }
 
 exports.create = async post => {

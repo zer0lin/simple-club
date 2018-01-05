@@ -8,7 +8,7 @@ exports.show = async (ctx, next) => {
 }
 
 exports.show_create = async (ctx, next) => {
-  await ctx.render('create_board');
+  await ctx.render('board_create');
 }
 
 exports.create = async (ctx, next) => {
