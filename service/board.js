@@ -1,5 +1,5 @@
 const { query, parseData } = require('../util/dbutil');
-const objectid = require('objectid')
+const objectid = require('objectid');
 
 exports.show = async (ctx, next) => {
   let sql = `select * from board order by sub_id desc`;

@@ -6,7 +6,9 @@
         <img src="/img/timg.jpg">
       </div>
       <div class="content">
-        <div class="header"><%= board.name %></div>
+        <div class="header">
+          <h3><a href="/board/<%= board.name %>"><%= board.name %></a></h3>
+        </div>
       </div>
       <div class="extra content">
         <% if (user && user.auth == 1) { %>

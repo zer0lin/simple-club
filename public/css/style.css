@@ -66,6 +66,10 @@ a:hover {
   float: right;
 }
 
+.header h3 a {
+  color: #46a3e0 !important;
+}
+
 /* ---------- post-content ---------- */
 
 .post-content h3 a {

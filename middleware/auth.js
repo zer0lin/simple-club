@@ -21,7 +21,7 @@ module.exports = {
     await next();
   },
   checkUser: async (ctx, next) => {
-    if (ctx.session.user.auth != 1) {
+    if (ctx.session.user.auth != 0) {
       ctx.flash('error', '非普通用户');
       return ctx.redirect('back');
     }
