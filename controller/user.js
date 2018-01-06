@@ -88,3 +88,7 @@ exports.signin = async (ctx, next) => {
   ctx.session.user = user[0];
   ctx.redirect('/board');
 }
+
+exports.info_edit = async (ctx, next) => {
+  await ctx.render('info_edit');
+}

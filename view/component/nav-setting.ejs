@@ -5,6 +5,7 @@
       <div class="menu">
         <% if (user && user.auth == 0) { %>
           <a class="item" href="/post/create">发表文章</a>
+          <a class="item" href="/user/<%= user.username %>/edit">编辑个人信息</a>
           <div class="divider"></div>
           <a class="item" href="/signout">登出</a>
         <% } else if (user && user.auth == 1) { %>

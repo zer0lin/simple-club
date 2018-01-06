@@ -35,7 +35,8 @@ router.get('/signout', auth.checkLogin, controller.user.signout);
 router.get('/signin', auth.checkNotLogin, controller.user.show_signin);
 // 登陆请求
 router.post('/signin', auth.checkNotLogin, controller.user.signin);
-
+// 编辑个人信息页
+router.get('/user/:username/edit', auth.checkUser, controller.user.info_edit)
 
 
 module.exports = router;
