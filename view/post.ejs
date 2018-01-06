@@ -1,1 +1,92 @@
+<%- include('header') %>
 
+<div class="post-content">
+  <div class="ui grid">
+    <div class="four wide column">
+      <a class="avatar avatar-link"
+         href="javascript:void(0);"
+         data-title="<%= post.author %>">
+        <img class="avatar" src="/img/person.png">
+      </a>
+    </div>
+
+    <div class="eight wide column">
+      <div class="ui segment">
+        <h3><a href="#"><%= post.title %></a></h3>
+        <% post.content.forEach(section => { %>
+          <p><%= section %></p>
+        <% }) %>
+        <div>
+          <span class="tag">发布于 <%= post.moment %> · 作者 <%= post.author %></span>
+          <span class="tag right">
+            <% if (user && user.auth == 1) { %>
+              <div class="ui inline dropdown">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <div class="item"><a href="#">编辑</a></div>
+                  <div class="item"><a href="#">删除</a></div>
+                </div>
+              </div>
+            <% } %>
+            <% if (user && user.auth == 0 && user.username === post.author) { %>
+              <div class="ui inline dropdown">
+                <div class="text"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <div class="item"><a href="#">删除</a></div>
+                </div>
+              </div>
+            <% } %>
+
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="four wide column"></div>
+  <div class="eight wide column">
+    <div class="ui segment">
+      <div class="ui minimal comments">
+        <h3 class="ui dividing header">留言</h3>
+
+        <% comment_list.forEach(function (comment) { %>
+          <div class="comment">
+            <span class="avatar">
+              <img src="/img/person.png">
+            </span>
+            <div class="content">
+              <a class="author" href="javascript:void(0);"><%= comment.author.name %></a>
+              <div class="metadata">
+                <span class="date">发布于 <%= comment.created_at %></span>
+              </div>
+              <div class="text"><%- comment.content %></div>
+
+              <% if (user && comment.author && (user.username === post.author || user.auth == 1)) { %>
+                <div class="actions">
+                  <a class="reply" href="/comments/<%= comment.id %>/delete">删除</a>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        <% }) %>
+
+        <% if (user && user.auth == 0) { %>
+          <form class="ui reply form" method="post" action="/comments">
+            <input name="post_id" value="<%= post.id %>" hidden>
+            <div class="field">
+              <textarea name="content"></textarea>
+            </div>
+            <input type="submit" class="ui icon button" value="留言" />
+          </form>
+        <% } %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('footer') %>

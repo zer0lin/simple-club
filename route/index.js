@@ -22,6 +22,8 @@ router.get('/board/:name', controller.post.show_posts);
 router.get('/post/create', auth.checkUser, controller.post.show_create);
 // 创建帖子请求
 router.post('/post/create', auth.checkUser, controller.post.create);
+// 单个帖子页
+router.get('/post/:post_id', controller.post.show_post);
 
 // 注册页
 router.get('/signup', auth.checkNotLogin, controller.user.show_signup)

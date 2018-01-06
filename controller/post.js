@@ -9,6 +9,17 @@ exports.show_posts = async (ctx, next) => {
   });
 }
 
+exports.show_post = async (ctx, next) => {
+  let post_id = ctx.params.post_id;
+  let post = await service.post.post(post_id);
+  let comment_list = await service.comment.comment_list(post_id);
+  post[0].content = post[0].content.split('\r\n');
+  await ctx.render('post', {
+    post: post[0],
+    comment_list: comment_list
+  });
+}
+
 exports.show_create = async (ctx, next) => {
   await ctx.render('post_create');
 }
