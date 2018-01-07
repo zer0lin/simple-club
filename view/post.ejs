@@ -59,13 +59,13 @@
               <img src="/img/person.png">
             </span>
             <div class="content">
-              <a class="author" href="javascript:void(0);"><%= comment.author.name %></a>
+              <a class="author" href="javascript:void(0);"><%= comment.author %></a>
               <div class="metadata">
-                <span class="date">发布于 <%= comment.created_at %></span>
+                <span class="date">发布于 <%= comment.moment %></span>
               </div>
               <div class="text"><%- comment.content %></div>
 
-              <% if (user && comment.author && (user.username === post.author || user.auth == 1)) { %>
+              <% if (user && comment.author && (user.username === comment.author || user.auth == 1)) { %>
                 <div class="actions">
                   <a class="reply" href="/comments/<%= comment.id %>/delete">删除</a>
                 </div>
@@ -75,7 +75,7 @@
         <% }) %>
 
         <% if (user && user.auth == 0) { %>
-          <form class="ui reply form" method="post" action="/comments">
+          <form class="ui reply form" method="post" action="/comment/create">
             <input name="post_id" value="<%= post.id %>" hidden>
             <div class="field">
               <textarea name="content"></textarea>

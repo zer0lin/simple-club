@@ -25,6 +25,10 @@ router.post('/post/create', auth.checkUser, controller.post.create);
 // 单个帖子页
 router.get('/post/:post_id', controller.post.show_post);
 
+// 发表评论请求
+router.post('/comment/create', auth.checkUser, controller.comment.create);
+
+
 // 注册页
 router.get('/signup', auth.checkNotLogin, controller.user.show_signup)
 // 注册请求
