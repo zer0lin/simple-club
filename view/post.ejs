@@ -67,7 +67,7 @@
 
               <% if (user && comment.author && (user.username === comment.author || user.auth == 1)) { %>
                 <div class="actions">
-                  <a class="reply" href="/comments/<%= comment.id %>/delete">删除</a>
+                  <a class="reply" href="/comment/<%= comment.id %>/delete">删除</a>
                 </div>
               <% } %>
             </div>

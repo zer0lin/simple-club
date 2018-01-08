@@ -27,7 +27,8 @@ router.get('/post/:post_id', controller.post.show_post);
 
 // 发表评论请求
 router.post('/comment/create', auth.checkUser, controller.comment.create);
-
+// 删除评论
+router.get('/comment/:comment_id/delete', auth.checkLogin, controller.comment.delete);
 
 // 注册页
 router.get('/signup', auth.checkNotLogin, controller.user.show_signup)

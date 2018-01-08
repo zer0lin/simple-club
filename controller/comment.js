@@ -21,3 +21,26 @@ exports.create = async (ctx, next) => {
     ctx.redirect('back');
   }
 }
+
+exports.delete = async (ctx, next) => {
+  const comment_id = ctx.params.comment_id;
+  const username = ctx.session.user.username;
+  const auth = ctx.session.user.auth;
+  let comment = await service.comment.comment(comment_id);
+  if (!comment.length) {
+    ctx.flash('error', '留言不存在');
+    return ctx.redirect('back');
+  }
+  if (!(comment[0].author == username || auth == 1)) {
+    ctx.flash('error', '没有权限删除留言');
+    return ctx.redirect('back');
+  }
+  try {
+    await service.comment.delete(comment_id);
+  } catch (err) {
+    ctx.flash('error', err.message);
+    return ctx.redirect('back');
+  }
+  ctx.flash('success', '删除留言成功');
+  return ctx.redirect('back');
+}

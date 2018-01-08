@@ -12,3 +12,14 @@ exports.create = async comment => {
   let sql = `insert into comment(id, post_id, author, content, moment) values(?, ?, ?, ?, ?)`;
   await query(sql, [id.toString(), comment.post_id, comment.author, comment.content, comment.time]);
 }
+
+exports.comment = async comment_id => {
+  let sql = `select * from comment where id = ?`;
+  let comment = await query(sql, [comment_id]);
+  return parseData(comment);
+}
+
+exports.delete = async comment_id => {
+  let sql = `delete from comment where id = ?`;
+  await query(sql, [comment_id]);
+}
