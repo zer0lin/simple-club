@@ -22,7 +22,7 @@ exports.create = async (ctx, next) => {
   }
 }
 
-exports.delete = async (ctx, next) => {
+exports.delete_by_id = async (ctx, next) => {
   const comment_id = ctx.params.comment_id;
   const username = ctx.session.user.username;
   const auth = ctx.session.user.auth;
@@ -36,7 +36,7 @@ exports.delete = async (ctx, next) => {
     return ctx.redirect('back');
   }
   try {
-    await service.comment.delete(comment_id);
+    await service.comment.delete_by_id(comment_id);
   } catch (err) {
     ctx.flash('error', err.message);
     return ctx.redirect('back');

@@ -19,7 +19,12 @@ exports.comment = async comment_id => {
   return parseData(comment);
 }
 
-exports.delete = async comment_id => {
+exports.delete_by_id = async comment_id => {
   let sql = `delete from comment where id = ?`;
   await query(sql, [comment_id]);
+}
+
+exports.delete_by_post_id = async post_id => {
+  let sql = `delete from comment where post_id = ?`;
+  await query(sql, [post_id]);
 }

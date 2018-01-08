@@ -1,12 +1,9 @@
 const { query, parseData } = require('../util/dbutil');
 const objectid = require('objectid');
 
-exports.post_list = async board_name => {
-  let sql = `select * from board where name = "${board_name}"`;
-  let board = await query(sql, []);
-  board = parseData(board);
+exports.post_list = async board_id => {
   sql = `select * from post where board_id = ? order by sub_id desc`;
-  let result = await query(sql, [board[0].id]);
+  let result = await query(sql, [board_id]);
   return parseData(result);
 }
 
@@ -26,4 +23,9 @@ exports.post = async (post_id) => {
   let sql = `select * from post where id = ?`;
   let post = await query(sql, [post_id]);
   return parseData(post);
+}
+
+exports.delete_by_id = async post_id => {
+  let sql = `delete from post where id = ?`;
+  await query(sql, [post_id]);
 }

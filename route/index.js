@@ -17,18 +17,20 @@ router.get('/board/create', auth.checkAdmin, controller.board.show_create);
 router.post('/board/create', auth.checkAdmin, controller.board.create);
 
 // 板块下的帖子页
-router.get('/board/:name', controller.post.show_posts);
+router.get('/board/:board_id', controller.post.show_posts);
 // 创建帖子页
 router.get('/post/create', auth.checkUser, controller.post.show_create);
 // 创建帖子请求
 router.post('/post/create', auth.checkUser, controller.post.create);
 // 单个帖子页
 router.get('/post/:post_id', controller.post.show_post);
+// 删除帖子
+router.get('/post/:post_id/delete', auth.checkLogin, controller.post.delete);
 
 // 发表评论请求
 router.post('/comment/create', auth.checkUser, controller.comment.create);
 // 删除评论
-router.get('/comment/:comment_id/delete', auth.checkLogin, controller.comment.delete);
+router.get('/comment/:comment_id/delete', auth.checkLogin, controller.comment.delete_by_id);
 
 // 注册页
 router.get('/signup', auth.checkNotLogin, controller.user.show_signup)
