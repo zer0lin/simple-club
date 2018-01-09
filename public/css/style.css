@@ -90,3 +90,8 @@ a:hover {
 .post-content .tag.right a {
   color: #999;
 }
+
+.ui.segment p {
+  word-wrap: break-word;
+  word-break: break-all;
+}

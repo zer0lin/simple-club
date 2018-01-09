@@ -7,7 +7,7 @@
 
     <div class="eight wide column">
       <div class="ui segment">
-        <h3><a href="#"><%= post.title %></a></h3>
+        <h3><a href="/post/<%= post.id %>"><%= post.title %></a></h3>
         <% post.content.forEach(section => { %>
           <p><%= section %></p>
         <% }) %>
