@@ -7,7 +7,7 @@
       <div class="field required">
         <label>用户名</label>
         <div class="ui disabled input">
-          <input placeholder="<%= user.username %>" type="text" name="username" value="<%= user.username %>">
+          <input type="text" name="username" value="<%= user.username %>">
         </div>
       </div>
       <div class="field required">
@@ -20,11 +20,16 @@
       </div>
       <div class="field required">
         <label>个人简介</label>
-        <textarea name="bio" rows="5"></textarea>
+        <textarea name="bio" rows="5"><%= user.bio %></textarea>
       </div>
       <input type="submit" class="ui button fluid" value="更新">
     </form>
   </div>
 </div>
-
+<script>
+  $(function () {
+    // 个人信息修改性别默认选择
+  $('option[value="<%= user.gender %>"]').attr('selected', true);
+  });
+</script>
 <%- include('footer') %>

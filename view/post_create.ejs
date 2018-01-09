@@ -1,11 +1,6 @@
 <%- include('header') %>
 <div class="ui grid">
   <div class="four wide column">
-    <a class="avatar avatar-link"
-       href="javascript:void(0);"
-       data-title="<%= user.username %>">
-      <img class="avatar" src="/img/person.png">
-    </a>
   </div>
 
   <div class="eight wide column">
@@ -16,7 +11,11 @@
       </div>
       <div class="field required">
         <label>板块名</label>
-        <input type="text" name="board_name">
+        <select class="ui compact selection dropdown" name="board_id">
+          <% board_list.forEach(board => { %>
+            <option value="<%= board.id %>"><%= board.name %></option>
+          <% }) %>
+        </select>
       </div>
       <div class="field required">
         <label>内容</label>

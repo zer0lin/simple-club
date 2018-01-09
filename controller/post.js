@@ -23,14 +23,17 @@ exports.show_post = async (ctx, next) => {
 }
 
 exports.show_create = async (ctx, next) => {
-  await ctx.render('post_create');
+  let board_list = await service.board.board_list();
+  await ctx.render('post_create', {
+    board_list: board_list
+  });
 }
 
 exports.create = async (ctx, next) => {
   const author = ctx.session.user.username;
   const title = ctx.request.body.title;
   const content = ctx.request.body.content;
-  const board_name = ctx.request.body.board_name;
+  const board_id = ctx.request.body.board_id;
   let time = moment().format('YYYY-MM-DD HH:mm');
   try {
     if (!title.length) {
@@ -39,8 +42,8 @@ exports.create = async (ctx, next) => {
     if (!content.length) {
       throw new Error('请填写内容');
     }
-    if (!board_name.length) {
-      throw new Error('请填写板块');
+    if (!board_id.length) {
+      throw new Error('请选择板块');
     }
   } catch (err) {
     ctx.flash('error', err.message);
@@ -50,17 +53,17 @@ exports.create = async (ctx, next) => {
     title: title,
     author: author,
     content: content,
-    board_name: board_name,
+    board_id: board_id,
     time: time
   }
   try {
-    service.post.create(post);
+    await service.post.create(post);
   } catch (err) {
     ctx.flash('error', err.message);
     return ctx.redirect('back');
   }
   ctx.flash('success', '发布成功');
-  let board_path = '/board/' + board_name;
+  let board_path = '/board/' + board_id;
   ctx.redirect(board_path);
 }
 
@@ -85,5 +88,6 @@ exports.delete = async (ctx, next) => {
     return ctx.redirect('back');
   }
   ctx.flash('success', '删除文章成功');
-  return ctx.redirect('/board/<%= post.board_id %>');
+  let board_path = '/board/' + post.board_id;
+  return ctx.redirect(board_path);
 }

@@ -8,7 +8,7 @@ exports.post_list = async board_id => {
 }
 
 exports.create = async post => {
-  let sql = `select * from board where name = "${post.board_name}"`;
+  let sql = `select * from board where id = "${post.board_id}"`;
   let board = await query(sql, []);
   board = parseData(board);
   if (board.length < 1) {
@@ -16,7 +16,7 @@ exports.create = async post => {
   }
   const id = objectid();
   sql = `insert into post(id, board_id, title, author, content, moment) values(?, ?, ?, ?, ?, ?)`;
-  await query(sql, [id.toString(), board[0].id, post.title, post.author, post.content, post.time]);
+  await query(sql, [id.toString(), post.board_id, post.title, post.author, post.content, post.time]);
 }
 
 exports.post = async (post_id) => {

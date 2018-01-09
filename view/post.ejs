@@ -3,11 +3,6 @@
 <div class="post-content">
   <div class="ui grid">
     <div class="four wide column">
-      <a class="avatar avatar-link"
-         href="javascript:void(0);"
-         data-title="<%= post.author %>">
-        <img class="avatar" src="/img/person.png">
-      </a>
     </div>
 
     <div class="eight wide column">
@@ -55,11 +50,8 @@
 
         <% comment_list.forEach(function (comment) { %>
           <div class="comment">
-            <span class="avatar">
-              <img src="/img/person.png">
-            </span>
             <div class="content">
-              <a class="author" href="javascript:void(0);"><%= comment.author %></a>
+              <span class="author" href="javascript:void(0);"><%= comment.author %></span>
               <div class="metadata">
                 <span class="date">发布于 <%= comment.moment %></span>
               </div>

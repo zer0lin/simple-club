@@ -1,7 +1,7 @@
 const service = require('../service');
 
 exports.show = async (ctx, next) => {
-  let board_list = await service.board.show();
+  let board_list = await service.board.board_list();
   await ctx.render('board', {
     board_list: board_list
   });
