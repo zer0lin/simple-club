@@ -24,6 +24,9 @@ exports.signup = async (ctx, next) => {
     if (password != repassword) {
       throw new Error('两次输入的密码不一致');
     }
+    if (bio.length < 1) {
+      throw new Error('个人简介不能为空');
+    }
   } catch(e) {
     ctx.flash('error', e.message);
     return ctx.redirect('/signup');
@@ -89,6 +92,43 @@ exports.signin = async (ctx, next) => {
   ctx.redirect('/board');
 }
 
-exports.info_edit = async (ctx, next) => {
+exports.show_info_edit = async (ctx, next) => {
   await ctx.render('info_edit');
+}
+
+exports.info_edit = async (ctx, next) => {
+  const sess_username = ctx.session.user.username;
+  const username = ctx.request.body.username;
+  const gender = ctx.request.body.gender;
+  const bio = ctx.request.body.bio;
+  const user = {
+    username: username,
+    gender: gender,
+    bio: bio
+  }
+  try {
+    if (sess_username != username) {
+      throw new Error('没有编辑权限');
+    }
+    if (['m', 'f', 'x'].indexOf(gender) === -1) {
+      throw new Error('性别只能是男、女或保密');
+    }
+    if (bio.length < 1) {
+      throw new Error('个人简介不能为空');
+    }
+  } catch (err) {
+    ctx.flash('error', err.message);
+    return ctx.redirect('back');
+  }
+  try {
+    await service.user.info_edit(user);
+  } catch (err) {
+    ctx.flash('error', err.message);
+    return ctx.redirect('back');
+  }
+  // 更新session中的个人信息
+  ctx.session.user.gender = gender;
+  ctx.session.user.bio = bio;
+  ctx.flash('success', '个人信息修改成功');
+  return ctx.redirect('/board');
 }

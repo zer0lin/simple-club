@@ -15,3 +15,8 @@ exports.signin = async (username) => {
   let user = await query(sql, []);
   return parseData(user);
 }
+
+exports.info_edit = async user => {
+  let sql = `update user set gender = ?, bio = ? where username = ?`;
+  await query(sql, [user.gender, user.bio, user.username]);
+}
