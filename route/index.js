@@ -15,6 +15,12 @@ router.get('/board', controller.board.show);
 router.get('/board/create', auth.checkAdmin, controller.board.show_create);
 // 创建板块请求
 router.post('/board/create', auth.checkAdmin, controller.board.create);
+// 修改板块页
+router.get('/board/:board_id/edit', auth.checkAdmin, controller.board.show_edit);
+// 修改板块请求
+router.post('/board/:board_id/edit', auth.checkAdmin, controller.board.edit);
+// 删除板块请求
+router.get('/board/:board_id/delete', auth.checkAdmin, controller.board.delete);
 
 // 板块下的帖子页
 router.get('/board/:board_id', controller.post.show_posts);
@@ -46,6 +52,5 @@ router.post('/signin', auth.checkNotLogin, controller.user.signin);
 router.get('/user/:username/edit', auth.checkUser, controller.user.show_info_edit);
 // 编辑个人信息请求
 router.post('/user/:username/edit', auth.checkUser, controller.user.info_edit);
-
 
 module.exports = router;
