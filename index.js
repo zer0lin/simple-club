@@ -8,6 +8,7 @@ const bodyParser = require('koa-bodyparser');
 const router = require('./route');
 const session = require('koa-generic-session');
 const flash = require('koa-better-flash');
+const config = require('config-lite')(__dirname);
 
 const app = new Koa();
 
@@ -49,4 +50,4 @@ app.use(bodyParser());
 // 配置路由
 app.use(router.routes());
 
-app.listen(3000);
+app.listen(config.port);

@@ -1,10 +1,11 @@
 const mysql = require('mysql');
+const config = require('config-lite')(__dirname);
 
 const pool = mysql.createPool({
-  host     :  '127.0.0.1',
-  user     :  'root',
-  password :  'root',
-  database :  'simple-club'
+  host: config.db.host,
+  user: config.db.user,
+  password: config.db.password,
+  database: config.db.database
 });
 
 let query = function (sql, values) {
