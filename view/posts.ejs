@@ -1,5 +1,11 @@
 <%- include('header') %>
-
+<div class="ui grid">
+    <div class="four wide column">
+    </div>
+    <div class="eight wide column">
+      <nav><a href="/board">首页</a> / <a href="/board/<%= board.id %>"><%= board.name %></a></nav>
+    </div>
+</div>
 <% post_list.forEach(function (post) { %>
   <div class="post-content">
     <div class="ui grid">

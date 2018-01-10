@@ -3,8 +3,10 @@ const moment = require('moment');
 
 exports.show_posts = async (ctx, next) => {
   let board_id = ctx.params.board_id;
+  let board = await service.board.board(board_id);
   let post_list = await service.post.post_list(board_id);
   await ctx.render('posts', {
+    board: board[0],
     post_list: post_list
   });
 }
@@ -12,13 +14,15 @@ exports.show_posts = async (ctx, next) => {
 exports.show_post = async (ctx, next) => {
   let post_id = ctx.params.post_id;
   let post = await service.post.post(post_id);
+  let board = await service.board.board(post[0].board_id);
   let comment_list = await service.comment.comment_list(post_id);
   if (post[0]) {
     post[0].content = post[0].content.split('\r\n');
   }
   await ctx.render('post', {
     post: post[0],
-    comment_list: comment_list
+    comment_list: comment_list,
+    board: board[0]
   });
 }
 
