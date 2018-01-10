@@ -57,4 +57,6 @@ router.get('/user/:username/edit', auth.checkUser, controller.user.show_info_edi
 // 编辑个人信息请求
 router.post('/user/:username/edit', auth.checkUser, controller.user.info_edit);
 
+router.get('*', controller.error.err_404);
+
 module.exports = router;
