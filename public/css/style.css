@@ -58,10 +58,9 @@ a:hover {
 
 /* ---------- board-content ---------- */
 
-.ui.link.cards  {
-  padding-left: 100px;
+.ui.card, .ui.cards>.card {
+  width: 210px;
 }
-
 .ui.inline.dropdown {
   float: right;
 }
