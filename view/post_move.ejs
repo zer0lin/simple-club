@@ -1,0 +1,26 @@
+<%- include('header') %>
+<div class="ui grid">
+  <div class="four wide column">
+  </div>
+
+  <div class="eight wide column">
+    <form class="ui form segment" method="post">
+      <div class="field required">
+        <label>请选择板块</label>
+        <select class="ui compact selection dropdown" name="board_id">
+          <% board_list.forEach(board => { %>
+            <option value="<%= board.id %>"><%= board.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <input type="submit" class="ui button" value="提交">
+    </form>
+  </div>
+</div>
+<script>
+  $(function () {
+    // 移动板块当前板块选中
+    $('option[value="<%= old_board_id %>"]').attr('selected', true);
+  });
+</script>
+<%- include('footer') %>

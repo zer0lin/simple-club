@@ -32,6 +32,10 @@ router.post('/post/create', auth.checkUser, controller.post.create);
 router.get('/post/:post_id', controller.post.show_post);
 // 删除帖子
 router.get('/post/:post_id/delete', auth.checkLogin, controller.post.delete);
+// 更改帖子所属的板块页
+router.get('/post/:post_id/move', auth.checkLogin, controller.post.show_move);
+// 更改帖子所属的板块请求
+router.post('/post/:post_id/move', auth.checkLogin, controller.post.move);
 
 // 发表评论请求
 router.post('/comment/create', auth.checkUser, controller.comment.create);

@@ -91,3 +91,36 @@ exports.delete = async (ctx, next) => {
   let board_path = '/board/' + post.board_id;
   return ctx.redirect(board_path);
 }
+
+exports.show_move = async (ctx, next) => {
+  const post_id = ctx.params.post_id;
+  const board_list = await service.board.board_list();
+  const post = await service.post.post(post_id);
+  await ctx.render('post_move', {
+    old_board_id: post[0].board_id,
+    board_list: board_list
+  });
+}
+
+exports.move = async (ctx, next) => {
+  const post_id = ctx.params.post_id;
+  const board_id = ctx.request.body.board_id;
+  board = await service.board.board(board_id);
+  try {
+    if (!board.length) {
+      throw new Error('板块不存在');
+    }
+  } catch (err) {
+    ctx.flash('error', err.message);
+    return ctx.redirect('back');
+  }
+  try {
+    await service.post.move(post_id, board_id);
+  } catch (err) {
+    ctx.flash('error', err.message);
+    return ctx.redirect('back');
+  }
+  ctx.flash('success', '移动板块成功');
+  let board_path = '/board/' + board_id;
+  return ctx.redirect(board_path);
+}

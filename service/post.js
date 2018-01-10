@@ -29,3 +29,8 @@ exports.delete_by_id = async post_id => {
   let sql = `delete from post where id = ?`;
   await query(sql, [post_id]);
 }
+
+exports.move = async (post_id, board_id) => {
+  let sql = `update post set board_id = ? where id = ?`;
+  await query(sql, [board_id, post_id]);
+}
