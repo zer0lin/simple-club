@@ -76,6 +76,7 @@ exports.delete = async (ctx, next) => {
   const username = ctx.session.user.username;
   const auth = ctx.session.user.auth;
   let post = await service.post.post(post_id);
+  let board_id = post.board_id;
   if (!post.length) {
     ctx.flash('error', '文章不存在');
     return ctx.redirect('back');
@@ -92,7 +93,7 @@ exports.delete = async (ctx, next) => {
     return ctx.redirect('back');
   }
   ctx.flash('success', '删除文章成功');
-  let board_path = '/board/' + post.board_id;
+  let board_path = '/board/' + post[0].board_id;
   return ctx.redirect(board_path);
 }
 
