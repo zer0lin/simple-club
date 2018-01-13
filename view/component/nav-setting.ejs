@@ -4,11 +4,21 @@
       <i class="icon bars"></i>
       <div class="menu">
         <% if (user && user.auth == 0) { %>
+          <span class="item">普通用户</span>
+          <span class="item">用户名 : <%= user.username %></span>
+          <span class="item">性别 : <%= ({m: '男', f: '女', x: '保密'})[user.gender] %></span>
+          <span class="item">个人简介 : <%= user.bio %></span>
+          <div class="divider"></div>
           <a class="item" href="/post/create">发表文章</a>
           <a class="item" href="/user/<%= user.username %>/edit">编辑个人信息</a>
           <div class="divider"></div>
           <a class="item" href="/signout">登出</a>
         <% } else if (user && user.auth == 1) { %>
+          <span class="item">管理员</span>
+          <span class="item">用户名 : <%= user.username %></span>
+          <span class="item">性别 : <%= ({m: '男', f: '女', x: '保密'})[user.gender] %></span>
+          <span class="item">个人简介 : <%= user.bio %></span>
+          <div class="divider"></div>
           <a class="item" href="/board/create">新建板块</a>
           <div class="divider"></div>
           <a class="item" href="/signout">登出</a>
